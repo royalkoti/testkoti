@@ -1,7 +1,7 @@
 # Starter pipeline
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+# https://demoroyal.azurewebsites.net
 
 trigger:
 - master
@@ -15,5 +15,12 @@ steps:
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
+    echo See https://demoroyal.azurewebsites.net
   displayName: 'Run a multi-line script'
+maven {
+    url 'https://pkgs.dev.azure.com/gopichand12it/_packaging/gopichand12it/maven/v1'
+    credentials {
+        username "AZURE_ARTIFACTS"
+        password System.getenv("AZURE_ARTIFACTS_ENV_ACCESS_TOKEN") ?: "${azureArtifactsGradleAccessToken}"
+    }
+}
